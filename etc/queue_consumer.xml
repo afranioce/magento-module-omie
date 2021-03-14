@@ -1,0 +1,10 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework-message-queue:etc/consumer.xsd">
+    <consumer name="omie.create_client.consumer" queue="omie.customer_registered.queue" connection="amqp"
+              handler="Omie\Integration\Amqp\Consumer\SendClientConsumer::process"/>
+    <consumer name="omie.update_client.consumer" queue="omie.customer_changed.queue" connection="amqp"
+              handler="Omie\Integration\Amqp\Consumer\SendClientConsumer::process"/>
+    <consumer name="omie.create_order.consumer" queue="omie.order_registered.queue" connection="amqp"
+              handler="Omie\Integration\Amqp\Consumer\SendOrderConsumer::process"/>
+</config>

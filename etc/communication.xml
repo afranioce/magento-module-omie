@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Communication/etc/communication.xsd">
+    <topic name="omie.customer_registered.topic" request="Magento\Customer\Api\Data\CustomerInterface">
+        <handler name="processCreateClient" type="Omie\Integration\Amqp\Consumer\SendClientConsumer" method="process"/>
+    </topic>
+    <topic name="omie.customer_changed.topic" request="Magento\Customer\Api\Data\CustomerInterface">
+        <handler name="processUpdateClient" type="Omie\Integration\Amqp\Consumer\SendClientConsumer" method="process"/>
+    </topic>
+    <topic name="omie.order_registered.topic" request="Magento\Sales\Api\Data\OrderInterface">
+        <handler name="processCreateOrder" type="Omie\Integration\Amqp\Consumer\SendOrderConsumer" method="process"/>
+    </topic>
+</config>

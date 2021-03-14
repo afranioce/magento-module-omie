@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Store:etc/config.xsd">
+    <default>
+        <omie>
+            <general>
+                <active>1</active>
+                <base_url>https://app.omie.com.br/api/v1/</base_url>
+                <app_key></app_key>
+                <app_secret></app_secret>
+                <prefix_integration>PORTAL-</prefix_integration>
+                <force_import>0</force_import>
+            </general>
+            <client>
+                <tag_consumer>Cliente</tag_consumer>
+                <tag_shipping_provider>Transportadora</tag_shipping_provider>
+            </client>
+        </omie>
+        <sales>
+            <omie_order>
+                <category></category>
+                <bank_account></bank_account>
+            </omie_order>
+        </sales>
+    </default>
+</config>

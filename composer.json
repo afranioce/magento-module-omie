@@ -1,0 +1,60 @@
+{
+    "name": "afranio/magento-module-omie",
+    "description": "N/A",
+    "version": "1.0.0",
+    "minimum-stability": "dev",
+    "prefer-stable": true,
+    "config": {
+        "sort-packages": true
+    },
+    "require": {
+        "php": "~7.4",
+        "afranio/omie-sdk": "dev-main",
+        "magento/framework": "103.0.*",
+        "magento/framework-message-queue": "100.4.*",
+        "magento/module-config": "101.2.*",
+        "magento/module-customer": "103.0.*",
+        "magento/module-sales": "103.0.*",
+        "psr/log": "^1.1",
+        "systemcode/brazilcustomerattributes": "^1.1"
+    },
+    "require-dev": {
+        "friendsofphp/php-cs-fixer": "^2.18",
+        "magento/magento-coding-standard": "*",
+        "phpunit/phpunit": "~9"
+    },
+    "suggest": {
+        "afranio/magento-module-omie-payment-boleto": "dev-main"
+    },
+    "type": "magento2-module",
+    "license": [
+        "OSL-3.0",
+        "AFL-3.0"
+    ],
+    "repositories": [
+        {
+            "type": "vcs",
+            "url": "git@github.com:afranioce/omie-sdk.git"
+        },
+        {
+            "type": "composer",
+            "url": "https://repo.magento.com/"
+        }
+    ],
+    "scripts": {
+        "lint": "php-cs-fixer fix --verbose --show-progress=estimating",
+        "lint:check": "php-cs-fixer fix --dry-run --verbose --show-progress=estimating",
+        "test": [
+            "@lint:check",
+            "@phpunit"
+        ]
+    },
+    "autoload": {
+        "files": [
+            "registration.php"
+        ],
+        "psr-4": {
+            "Omie\\Integration\\": ""
+        }
+    }
+}

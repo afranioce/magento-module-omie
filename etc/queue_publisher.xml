@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework-message-queue:etc/publisher.xsd">
+    <publisher topic="omie.customer_registered.topic">
+        <connection name="amqp" exchange="magento" />
+    </publisher>
+    <publisher topic="omie.customer_changed.topic">
+        <connection name="amqp" exchange="magento" />
+    </publisher>
+    <publisher topic="omie.order_registered.topic">
+        <connection name="amqp" exchange="magento" />
+    </publisher>
+</config>

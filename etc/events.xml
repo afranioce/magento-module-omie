@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Event/etc/events.xsd">
+    <event name="customer_save_after_data_object">
+        <observer name="omie_customer_after_save" instance="Omie\Integration\Observer\AfterCustomerSaveObserver" />
+    </event>
+    <event name="customer_address_save_after">
+        <observer name="omie_customer_address_after_save" instance="Omie\Integration\Observer\AfterCustomerAddressSaveObserver" />
+    </event>
+    <event name="sales_order_place_after">
+        <observer name="omie_order_after_save" instance="Omie\Integration\Observer\AfterOrderSaveObserver"  />
+    </event>
+    <event name="sales_order_payment_save_before">
+        <observer name="omie_payment_before_save" instance="Omie\Integration\Observer\BeforeOrderPaymentSaveObserver" />
+    </event>
+</config>

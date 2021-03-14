@@ -1,0 +1,87 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
+    <system>
+        <tab id="omie" translate="label" sortOrder="10">
+            <label>Omie</label>
+        </tab>
+        <section id="omie" translate="label" sortOrder="130" showInDefault="1" showInWebsite="1" canRestore="1">
+            <class>separator-top</class>
+            <label>Omie Integration</label>
+            <tab>omie</tab>
+            <resource>Omie_Integration::config</resource>
+            <group id="general" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" canRestore="1">
+                <label>General Configuration</label>
+                <field id="active" translate="label" type="select" sortOrder="1" showInDefault="1" showInWebsite="1" canRestore="1">
+                    <label>Omie integration Enabled</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="base_url" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" canRestore="1">
+                    <label>Base Url</label>
+                </field>
+                <field id="app_key" translate="label" type="text" sortOrder="20" showInDefault="1" showInWebsite="1" canRestore="1">
+                    <label>App Key</label>
+                </field>
+                <field id="app_secret" translate="label" type="password" sortOrder="30" showInDefault="1" showInWebsite="1" canRestore="1">
+                    <label>App Secret</label>
+                </field>
+                <field id="prefix_integration" translate="label" type="text" sortOrder="40" showInDefault="1" showInWebsite="1" canRestore="1">
+                    <label>Prefix Integration</label>
+                </field>
+                <field id="force_import" translate="label" type="select" sortOrder="40" showInDefault="1" showInWebsite="1" canRestore="1">
+                    <label>Force Import</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <comment>Yes: import all content. No: import only recent content.</comment>
+                </field>
+            </group>
+            <group id="client" translate="label" type="text" sortOrder="20" showInDefault="1" showInWebsite="1" canRestore="1">
+                <label>Client Configuration</label>
+                <field id="tag_consumer" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" canRestore="1">
+                    <label>Tag Name For Clients</label>
+                </field>
+                <field id="tag_shipping_provider" translate="label" type="text" sortOrder="20" showInDefault="1" showInWebsite="1" canRestore="1">
+                    <label>Tag Name For Shipping Providers</label>
+                </field>
+            </group>
+        </section>
+        <section id="sales">
+            <group id="omie_order" translate="label" type="text" sortOrder="700" showInDefault="1" showInWebsite="1" canRestore="1">
+                <label>Omie Order</label>
+                <field id="category" translate="label" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" canRestore="1">
+                    <label>Category</label>
+                    <source_model>Omie\Integration\Model\Adminhtml\Source\Category</source_model>
+                </field>
+                <field id="bank_account" translate="label" type="select" sortOrder="20" showInDefault="1" showInWebsite="1" canRestore="1">
+                    <label>Bank Account</label>
+                    <source_model>Omie\Integration\Model\Adminhtml\Source\BankAccount</source_model>
+                </field>
+            </group>
+            <group id="omie_order_steps" translate="label" type="text" sortOrder="700" showInDefault="1" showInWebsite="1" canRestore="1">
+                <label>Omie Order State to Steps Mapping</label>
+                <field id="step_10" translate="label" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" canRestore="1">
+                    <label>Step First</label>
+                    <source_model>Magento\Sales\Model\Config\Source\Order\Status</source_model>
+                </field>
+                <field id="step_20" translate="label" type="select" sortOrder="20" showInDefault="1" showInWebsite="1" canRestore="1">
+                    <label>Step Second</label>
+                    <source_model>Magento\Sales\Model\Config\Source\Order\Status</source_model>
+                </field>
+                <field id="step_30" translate="label" type="select" sortOrder="30" showInDefault="1" showInWebsite="1" canRestore="1">
+                    <label>Step Third</label>
+                    <source_model>Magento\Sales\Model\Config\Source\Order\Status</source_model>
+                </field>
+                <field id="step_40" translate="label" type="select" sortOrder="40" showInDefault="1" showInWebsite="1" canRestore="1">
+                    <label>Step Fourth</label>
+                    <source_model>Magento\Sales\Model\Config\Source\Order\Status</source_model>
+                </field>
+                <field id="step_50" translate="label" type="select" sortOrder="50" showInDefault="1" showInWebsite="1" canRestore="1">
+                    <label>Step Fifth</label>
+                    <source_model>Magento\Sales\Model\Config\Source\Order\Status</source_model>
+                </field>
+                <field id="step_60" translate="label" type="select" sortOrder="60" showInDefault="1" showInWebsite="1" canRestore="1">
+                    <label>Step Sixth</label>
+                    <source_model>Magento\Sales\Model\Config\Source\Order\Status</source_model>
+                </field>
+            </group>
+        </section>
+    </system>
+</config>

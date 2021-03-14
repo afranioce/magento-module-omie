@@ -1,0 +1,8 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework-message-queue:etc/topology.xsd">
+    <exchange name="magento" type="topic" connection="amqp">
+        <binding id="customerRegisteredBinding" topic="omie.customer_registered.topic" destinationType="queue" destination="omie.customer_registered.queue"/>
+        <binding id="customerChangedBinding" topic="omie.customer_changed.topic" destinationType="queue" destination="omie.customer_changed.queue"/>
+        <binding id="orderRegisteredBinding" topic="omie.order_registered.topic" destinationType="queue" destination="omie.order_registered.queue"/>
+    </exchange>
+</config>

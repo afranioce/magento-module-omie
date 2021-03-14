@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Cron:etc/crontab.xsd">
+    <group id="default">
+        <job name="omie_price_table_import" instance="Omie\Integration\Cron\PriceTableImportCron" method="process">
+            <schedule>30 * * * *</schedule>
+        </job>
+        <job name="omie_client_import" instance="Omie\Integration\Cron\ClientImportCron" method="process">
+            <schedule>10 * * * *</schedule>
+        </job>
+        <job name="omie_product_import" instance="Omie\Integration\Cron\ProductImportCron" method="process">
+            <schedule>10 * * * *</schedule>
+        </job>
+    </group>
+</config>
