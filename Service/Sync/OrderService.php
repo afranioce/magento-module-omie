@@ -14,8 +14,8 @@ use Magento\Sales\Api\Data\OrderPaymentInterface;
 use Magento\Sales\Api\OrderRepositoryInterface;
 use Omie\Integration\Helper\Data;
 use Omie\Integration\Helper\GeneralCodes;
-use Omie\Integration\Model\BilletPayment;
 use Omie\Integration\Model\Omie;
+use Omie\Payment\Boleto\Model\Method\Boleto;
 use Omie\Sdk\Entity\Product\Order\Installment;
 use Omie\Sdk\Entity\Product\Order\Item;
 use Omie\Sdk\Entity\Product\Order\Order as SdkOrder;
@@ -62,10 +62,10 @@ final class OrderService implements OrderServiceInterface
         } catch (\Exception $exception) {
             $this->logger->error(
                 sprintf(
-                   'Omie order %s transform error: %s',
-                   $order->getIncrementId(),
-                   $exception->getMessage()
-               )
+                    'Omie order %s transform error: %s',
+                    $order->getIncrementId(),
+                    $exception->getMessage()
+                )
             );
 
             throw $exception;
@@ -76,12 +76,12 @@ final class OrderService implements OrderServiceInterface
         } catch (ClientException $clientException) {
             $this->logger->error(
                 sprintf(
-                   'Omie order %s sent OmieId: %d, OrderId: %s error: %s',
-                   $order->getIncrementId(),
-                   $sdkOrder->getId(),
-                   $sdkOrder->getOrderId(),
-                   $clientException->getMessage()
-               )
+                    'Omie order %s sent OmieId: %d, OrderId: %s error: %s',
+                    $order->getIncrementId(),
+                    $sdkOrder->getId(),
+                    $sdkOrder->getOrderId(),
+                    $clientException->getMessage()
+                )
             );
 
             throw $clientException;
@@ -112,7 +112,12 @@ final class OrderService implements OrderServiceInterface
 
     private function transformOrderForSdkOrder(OrderInterface $order): SdkOrder
     {
+        $payment = $order->getPayment();
         $customer = $this->customerRepository->getById($order->getCustomerId());
+
+        $installments = class_exists(Boleto::class) && $payment->getMethod() == Boleto::CODE
+            ? $this->getInstallments($payment)
+            : [];
 
         return new SdkOrder(
             null,
@@ -120,32 +125,30 @@ final class OrderService implements OrderServiceInterface
             (int) $customer->getCustomAttribute(Omie::OMIE_ID)->getValue(),
             $this->helperData->getConfigValue('sales/omie_order/category'),
             (int) $this->helperData->getConfigValue('sales/omie_order/bank_account'),
-            $this->getBillingDate($order),
-            $this->getInstallmentCollection($order->getPayment()),
+            new DateTimeImmutable('+1 month'),
+            $installments,
             OrderSteps::FIRST,
-            $this->getItemCollection($order)
+            $this->getItems($order)
         );
     }
 
-    private function getInstallmentCollection(OrderPaymentInterface $payment): array
+    private function getInstallments(OrderPaymentInterface $payment): array
     {
-        $installmentCollection = [];
+        $installments = [];
 
-        if ($payment->getMethod() !== BilletPayment::CODE) {
-            return $installmentCollection;
-        }
-
-        $installmentDate = $this->getEndDatePurchaseCicle();
         $dateInterval = new DateInterval('P1M');
 
         $quantity = (int) $payment->getAdditionalInformation()[0];
         $amount = (float) $payment->getAdditionalInformation()[1];
+        $expirationDays = (float) $payment->getAdditionalInformation()[3];
         $percent = 100 * $amount / $payment->getAmountOrdered();
+
+        $installmentDate = new DateTimeImmutable(sprintf('+%d days', $expirationDays));
 
         for ($i = 1; $i <= $quantity; $i++) {
             $installmentDate = $installmentDate->add($dateInterval);
 
-            $installmentCollection[] = new Installment(
+            $installments[] = new Installment(
                 $i,
                 $installmentDate,
                 $percent,
@@ -153,20 +156,20 @@ final class OrderService implements OrderServiceInterface
             );
         }
 
-        return $installmentCollection;
+        return $installments;
     }
 
     /**
      * @throws \Magento\Framework\Exception\NoSuchEntityException
      */
-    private function getItemCollection(OrderInterface $order): array
+    private function getItems(OrderInterface $order): array
     {
-        $itemCollection = [];
+        $items = [];
 
         foreach ($order->getItems() as $orderItem) {
             $product = $this->productRepository->getById($orderItem->getProductId());
 
-            $itemCollection[] = new Item(
+            $items[] = new Item(
                 $this->helperData->getGeneralConfig(GeneralCodes::PREFIX_INTEGRATION) . $orderItem->getQuoteItemId(),
                 (int) $product->getCustomAttribute(Omie::OMIE_ID)->getValue(),
                 (int) $orderItem->getQtyOrdered(),
@@ -177,21 +180,6 @@ final class OrderService implements OrderServiceInterface
             );
         }
 
-        return $itemCollection;
-    }
-
-    private function getBillingDate(OrderInterface $order): DateTimeImmutable
-    {
-        return $order->getPayment() === BilletPayment::CODE
-            ? $this->getEndDatePurchaseCicle()
-            : new DateTimeImmutable();
-    }
-
-    /**
-     * TODO definir a data do final do ciclo
-     */
-    private function getEndDatePurchaseCicle(): DateTimeImmutable
-    {
-        return new DateTimeImmutable('+1 month');
+        return $items;
     }
 }
