@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "ae0e3eb713496b36eda3ead432fe5ff5",
+    "content-hash": "82230f17ea8f5df41bdf120e6f1b4e84",
     "packages": [
         {
             "name": "afranio/omie-sdk",
@@ -10123,7 +10123,7 @@
     "prefer-stable": true,
     "prefer-lowest": false,
     "platform": {
-        "php": "~7.3||~7.4"
+        "php": "~7.4"
     },
     "platform-dev": [],
     "plugin-api-version": "2.0.0"
