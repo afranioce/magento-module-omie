@@ -6,8 +6,10 @@ namespace Omie\Integration\Helper;
 
 use Magento\Framework\App\Helper\AbstractHelper;
 use Magento\Store\Model\ScopeInterface;
+use Omie\Sdk\Communication\AccessTokenInterface;
+use Omie\Sdk\Communication\UrlInterface;
 
-final class Data extends AbstractHelper
+final class Data extends AbstractHelper implements AccessTokenInterface, UrlInterface
 {
     private const XML_PATH_SECTION_OMIE = 'omie';
     private const XML_PATH_SECTION_PAYMENT = 'payment';
@@ -101,5 +103,20 @@ final class Data extends AbstractHelper
         $slugify = preg_replace("/[\/_|+ -]+/", $delimiter, $slugify);
 
         return $slugify;
+    }
+
+    public function getAppKey(): string
+    {
+        return $this->scopeConfig->getValue('payment/omie_billet/app_key', ScopeInterface::SCOPE_STORE, null);
+    }
+
+    public function getAppSecret(): string
+    {
+        return $this->scopeConfig->getValue('payment/omie_billet/app_secret', ScopeInterface::SCOPE_STORE, null);
+    }
+
+    public function getBaseUri(): string
+    {
+        return $this->scopeConfig->getValue('payment/omie_billet/base_url', ScopeInterface::SCOPE_STORE, null);
     }
 }

@@ -29,12 +29,15 @@
     <preference for="Omie\Integration\Service\ProductAttributeServiceInterface"
                 type="Omie\Integration\Service\ProductAttributeService" />
 
-    <preference for="Omie\Integration\Helper\InstallmentsCalculatorInterface"
-                type="Omie\Integration\Helper\InstallmentsCalculator" />
-
+    <type name="Omie\Sdk\Communication\Client">
+        <arguments>
+            <argument name="url" xsi:type="object">Omie\Integration\Helper\Data</argument>
+        </arguments>
+    </type>
     <type name="Omie\Sdk\Communication\OmieClient">
         <arguments>
             <argument name="client" xsi:type="object">Omie\Sdk\Communication\Client</argument>
+            <argument name="authData" xsi:type="objext">Omie\Integration\Helper\Data</argument>
         </arguments>
     </type>
 </config>

@@ -12,12 +12,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/afranioce/omie-sdk.git",
-                "reference": "387ca51a3784702eaa20fda363eeb15b79391a25"
+                "reference": "a9056fc8af5b89cb25178625e3f14bd555ab9b5b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/afranioce/omie-sdk/zipball/387ca51a3784702eaa20fda363eeb15b79391a25",
-                "reference": "387ca51a3784702eaa20fda363eeb15b79391a25",
+                "url": "https://api.github.com/repos/afranioce/omie-sdk/zipball/a9056fc8af5b89cb25178625e3f14bd555ab9b5b",
+                "reference": "a9056fc8af5b89cb25178625e3f14bd555ab9b5b",
                 "shasum": ""
             },
             "require": {
@@ -80,7 +80,7 @@
                 "source": "https://github.com/afranioce/omie-sdk/tree/main",
                 "issues": "https://github.com/afranioce/omie-sdk/issues"
             },
-            "time": "2021-03-14T01:46:31+00:00"
+            "time": "2021-03-16T01:13:26+00:00"
         },
         {
             "name": "colinmollenhour/credis",
