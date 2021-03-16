@@ -1,7 +1,18 @@
 <?xml version="1.0"?>
 <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
-    <preference for="Omie\Sdk\Communication\OmieClientInterface"
-                type="Omie\Sdk\Communication\OmieClient" />
+    <preference for="GuzzleHttp\ClientInterface" type="GuzzleHttp\Client" />
+    <preference for="Omie\Sdk\Communication\OmieClientInterface" type="Omie\Sdk\Communication\OmieClient" />
+    <type name="Omie\Sdk\Communication\Client">
+        <arguments>
+            <argument name="url" xsi:type="object">Omie\Integration\Helper\Data</argument>
+        </arguments>
+    </type>
+    <type name="Omie\Sdk\Communication\OmieClient">
+        <arguments>
+            <argument name="client" xsi:type="object">Omie\Sdk\Communication\Client</argument>
+            <argument name="authData" xsi:type="object">Omie\Integration\Helper\Data</argument>
+        </arguments>
+    </type>
 
     <preference for="Omie\Sdk\Service\Product\PriceTableServiceInterface"
                 type="Omie\Sdk\Service\Product\PriceTableService" />
@@ -28,16 +39,4 @@
 
     <preference for="Omie\Integration\Service\ProductAttributeServiceInterface"
                 type="Omie\Integration\Service\ProductAttributeService" />
-
-    <type name="Omie\Sdk\Communication\Client">
-        <arguments>
-            <argument name="url" xsi:type="object">Omie\Integration\Helper\Data</argument>
-        </arguments>
-    </type>
-    <type name="Omie\Sdk\Communication\OmieClient">
-        <arguments>
-            <argument name="client" xsi:type="object">Omie\Sdk\Communication\Client</argument>
-            <argument name="authData" xsi:type="objext">Omie\Integration\Helper\Data</argument>
-        </arguments>
-    </type>
 </config>

@@ -9,7 +9,7 @@ use Magento\Store\Model\ScopeInterface;
 use Omie\Sdk\Communication\AccessTokenInterface;
 use Omie\Sdk\Communication\UrlInterface;
 
-final class Data extends AbstractHelper implements AccessTokenInterface, UrlInterface
+class Data extends AbstractHelper implements AccessTokenInterface, UrlInterface
 {
     private const XML_PATH_SECTION_OMIE = 'omie';
     private const XML_PATH_SECTION_PAYMENT = 'payment';
