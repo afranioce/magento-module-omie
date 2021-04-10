@@ -107,16 +107,16 @@ class Data extends AbstractHelper implements AccessTokenInterface, UrlInterface
 
     public function getAppKey(): string
     {
-        return $this->scopeConfig->getValue('payment/omie_billet/app_key', ScopeInterface::SCOPE_STORE, null);
+        return $this->scopeConfig->getValue('omie/general/app_key', ScopeInterface::SCOPE_STORE, null);
     }
 
     public function getAppSecret(): string
     {
-        return $this->scopeConfig->getValue('payment/omie_billet/app_secret', ScopeInterface::SCOPE_STORE, null);
+        return $this->scopeConfig->getValue('omie/general/app_secret', ScopeInterface::SCOPE_STORE, null);
     }
 
     public function getBaseUri(): string
     {
-        return $this->scopeConfig->getValue('payment/omie_billet/base_url', ScopeInterface::SCOPE_STORE, null);
+        return $this->scopeConfig->getValue('omie/general/base_url', ScopeInterface::SCOPE_STORE, null);
     }
 }
