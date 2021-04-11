@@ -129,9 +129,13 @@ final class ProductService implements ProductServiceInterface
         $store = $this->storeManager->getDefaultStoreView();
 
         /** @var ?Characteristic $isFeatured */
-        $isFeatured = $sdkProduct->getCharacteristics()
-            ->find(fn (Characteristic $characteristic) => strtolower($characteristic->getName()) === 'destaque'
-                && strtolower($characteristic->getValue()) === 'sim');
+        $isFeatured = current(
+            array_filter(
+                $sdkProduct->getCharacteristics(),
+                fn (Characteristic $characteristic) => strtolower($characteristic->getName()) === 'destaque'
+                    && strtolower($characteristic->getValue()) === 'sim'
+                )
+        );
 
         return [
             'omie_id' => $sdkProduct->getId(),
@@ -228,8 +232,12 @@ final class ProductService implements ProductServiceInterface
     private function getColorOptionId(SdkProduct $sdkProduct): ?int
     {
         /** @var ?Characteristic $color */
-        $color = $sdkProduct->getCharacteristics()
-            ->find(fn (Characteristic $characteristic) => strtolower($characteristic->getName()) === 'cor');
+        $color = current(
+            array_filter(
+                $sdkProduct->getCharacteristics(),
+                fn (Characteristic $characteristic) => strtolower($characteristic->getName()) === 'cor'
+            )
+        );
 
         if (!$color) {
             return null;
