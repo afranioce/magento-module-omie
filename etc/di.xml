@@ -1,13 +1,9 @@
 <?xml version="1.0"?>
 <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <preference for="GuzzleHttp\ClientInterface" type="Omie\Sdk\Communication\Client" />
     <preference for="Omie\Sdk\Communication\OmieClientInterface" type="Omie\Sdk\Communication\OmieClient" />
     <preference for="Omie\Sdk\Communication\AccessTokenInterface" type="Omie\Integration\Helper\Data" />
     <preference for="Omie\Sdk\Communication\UrlInterface" type="Omie\Integration\Helper\Data" />
-    <type name="Omie\Sdk\Communication\OmieClientInterface">
-        <arguments>
-            <argument name="client" xsi:type="object">Omie\Sdk\Communication\Client</argument>
-        </arguments>
-    </type>
 
     <preference for="Omie\Sdk\Service\Product\PriceTableServiceInterface"
                 type="Omie\Sdk\Service\Product\PriceTableService" />
